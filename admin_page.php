@@ -1,6 +1,7 @@
 <?php
     @include 'config.php';
     session_start();
+    // echo $_SESSION['admin_name'];
     if(!isset($_SESSION['admin_name'])){
         header('location:login_form.php');
     }

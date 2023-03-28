@@ -1,5 +1,6 @@
 <?php
     @include 'config.php';
+    session_start();
     if(isset($_POST['submit'])){
         $email= mysqli_real_escape_string($conn,$_POST['email']);
         $fname= mysqli_real_escape_string($conn,$_POST['fname']);
@@ -8,12 +9,12 @@
         // $cpass = md5($_POST['cpassword']);
         $user_type = $_POST['user_type'];
 
-        $select = "SELECT * FROM customer WHERE email = '$email' && password = '$pass'";
+        $select = "SELECT * FROM customer WHERE email = '$email' && password = '$pass' && user_type = '$user_type'";
 
         $result = mysqli_query($conn,$select);
         $rows = mysqli_num_rows($result);
-        $row = mysqli_fetch_array($result);
-        print_r($row);
+        // $row = mysqli_fetch_array($result);
+        // print_r($rows);
         if($rows > 0){
             $row = mysqli_fetch_array($result);
             print_r($row);
@@ -27,7 +28,7 @@
             }
         }
         else{
-            echo $rows;
+            // echo $rows;
             $error[] = 'incorrect email or password!'; 
         }
 
