@@ -42,7 +42,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoginForm</title>
+    <title>Login</title>
     <!-- <link rel="stylesheet" href="css/style.css"> -->
     <script id="sharer_iife_script" src="https://patelka2211.github.io/sharer/bundle/sharer.iife.min.js"></script><script id="sharer_button_script" src="https://patelka2211.github.io/sharer/bundle/sharer_button.min.js" type="text/javascript"></script>
 </head>
@@ -64,7 +64,7 @@
             </select>
             <input type="submit" name="submit" value="Login now" class="form-btn">
             <p> Don't have an account? <a href="register_form.php">Register Now</a> </p>
-
+            <p> Forgot Password? <a href="forget_pass.php">Click Here</a> </p>
             
             
         </form>
