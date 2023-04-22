@@ -1,14 +1,26 @@
 <?php
     @include 'config.php';
+    function sqlPassword($input) {
+        $pass = strtoupper(
+                sha1(
+                        sha1($input, true)
+                )
+        );
+        $pass = '*' . $pass;
+        return $pass;
+    }
+    
     if(isset($_POST['submit'])){
         $email= mysqli_real_escape_string($conn,$_POST['email']);
         $fname= mysqli_real_escape_string($conn,$_POST['fname']);
         $lname= mysqli_real_escape_string($conn,$_POST['lname']);
-        $pass = md5($_POST['password']);
-        $cpass = md5($_POST['cpassword']);
-        $user_type = $_POST['user_type'];
+        $pass = sqlPassword($_POST['password']);
+        $cpass = sqlPassword($_POST['cpassword']);
 
-        $select = "SELECT * FROM customer WHERE email = '$email' && password = '$pass'";
+        // $user_type = $_POST['user_type'];
+        $user_type = "user";
+
+        $select = "SELECT * FROM customer WHERE email = '$email'";
 
         $result = mysqli_query($conn,$select);
 
@@ -20,7 +32,7 @@
                 $error[] = 'password not matched!';
             }
             else{
-                $insert = "INSERT INTO customer (password,first_name,last_name,email,user_type) VALUES('$pass','$fname','$lname','$email','$user_type')";
+                $insert = "INSERT INTO customer (`first_name`,`last_name`,`email`,`password`,`user_type`,`timestamp`) VALUES('$fname','$lname','$email','$pass','$user_type', CURRENT_TIMESTAMP())";
                 mysqli_query($conn,$insert);
                 header('location:login_form.php');
             }
@@ -36,7 +48,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registeration</title>
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="register_style.css">
 </head>
 <body>
     <div class="form-container">
@@ -48,16 +60,16 @@
                     };
                 };
             ?>
-            <input type="email" name="email" required placeholder="enter your email">
-            <input type="text" name="fname" required placeholder="enter your first name">
-            <input type="text" name="lname" required placeholder="enter your last name">
-            <input type="password" name="password" required placeholder="enter your password">
-            <input type="password" name="cpassword" required placeholder="confirm your password">
-            <select name="user_type">
+            <input type="email" name="email" required placeholder="enter your email"><br>
+            <input type="text" name="fname" required placeholder="enter your first name"><br>
+            <input type="text" name="lname" required placeholder="enter your last name"><br>
+            <input type="password" name="password" required placeholder="enter your password"><br>
+            <input type="password" name="cpassword" required placeholder="confirm your password"><br>
+            <!-- <select name="user_type">
                 <option value="user">user</option>
                 <option value="admin">admin</option>
-            </select>
-            <input type="submit" name="submit" value="register now" class="form-btn">
+            </select> -->
+            <input type="submit" name="submit" value="register now" class="form-btn"><br>
             <p> Already have an account? <a href="login_form.php">Login Now</a> </p>
 
             
