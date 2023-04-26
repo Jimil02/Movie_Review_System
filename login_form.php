@@ -14,11 +14,11 @@ function sqlPassword($input)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    echo "<h1>Here I am <h1>";
+    // echo "<h1>Here I am <h1>";
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     // $fname = mysqli_real_escape_string($conn, $_POST['fname']);
     // $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-    $pass = sqlPassword($_POST['password']);
+    $pass = sqlPassword(mysqli_real_escape_string($conn, $_POST['password']));
     // $cpass = md5($_POST['cpassword']);
     // $user_type = $_POST['user_type'];
 
@@ -27,19 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rows = mysqli_num_rows($result);
 
     // $row = mysqli_fetch_array($result);
-    print_r($rows);
+    // print_r($rows);
     if ($rows > 0) {
         $row = mysqli_fetch_array($result);
-        $user_tyoe_query = "SELECT `user_type` FROM `cutomer` WHERE `email` = '$email'";
+        $user_tyoe_query = "SELECT `user_type` FROM `customer` WHERE `email` = '$email'";
         $user_type_result = mysqli_query($conn, $user_tyoe_query);
         $user_type_array = mysqli_fetch_assoc($user_type_result);
         $user_type = $user_type_array['user_type'];
-        echo "<h1>" . $user_type . "<h1>";
-        print_r($row);
+        // echo "<h1>" . $user_type . "</h1>";
+        // print_r($row);
         if ($user_type == 'admin') {
+            $_SESSION['email'] = $row['email'];
             $_SESSION['admin_name'] = $row['first_name'];
             header('location:admin_page.php');
         } elseif ($user_type == 'user') {
+            $_SESSION['email'] = $row['email'];
             $_SESSION['user_name'] = $row['first_name'];
             header('location:user_page.php');
         }
@@ -86,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>Welcome</p>
             <input type="email" name="email" placeholder="Email" requied><br>
             <input type="password" name="password" placeholder="Password" requied><br>
-            <input type="button" name="submit" value="Sign in"><br>
+            <button name="submit" type="submit">SUBMIT</button><br>
             <a href="forget_pass.php">Forgot Password?</a>
             <a href="register_form.php">Register Now</a>
 
