@@ -3,7 +3,12 @@
 }
 
 body {
-  background: linear-gradient(45deg, #fc466b, #3f5efb);
+  /* background: linear-gradient(45deg, #fc466b, #3f5efb);
+   */
+   background: #606c88; /* fallback for old browsers */
+   background: -webkit-linear-gradient(to right, #606c88, #3f4c6b); /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to right, #606c88, #3f4c6b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ 
   height: 100vh;
   font-family: "Montserrat", sans-serif;
   /* background-repeat: no-repeat; */
@@ -126,6 +131,7 @@ body {
   height: 40%;
   width: 20%;
   margin-right: 2vw;
+  border-radius: 25px;
 }
 
 .side-content {

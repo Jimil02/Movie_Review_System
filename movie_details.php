@@ -1,6 +1,9 @@
 <?php
 @include 'config.php';
 session_start();
+
+$api_key = "69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c";
+
 if (!isset($_SESSION['email']) or !isset($_SESSION['admin_name']) and !isset($_SESSION['user_name'])) {
     // echo "Admin name not set";
     header('location:login_form.php');
@@ -57,17 +60,18 @@ $review_open = 0;
                 $movie_name = $_POST['search'];
 
                 curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://imdb8.p.rapidapi.com/auto-complete?q=" . $movie_name,
+                    CURLOPT_URL => "https://online-movie-database.p.rapidapi.com/auto-complete?q=" . $movie_name,
                     CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 10,
                     CURLOPT_TIMEOUT => 30,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
-                        "X-RapidAPI-Host: imdb8.p.rapidapi.com",
-                        "X-RapidAPI-Key: 69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c"
+                        "X-RapidAPI-Host: online-movie-database.p.rapidapi.com",
+                        "X-RapidAPI-Key: " . $api_key,
+                        // "X-RapidAPI-Key: 2b4d92d6c0msh9b1c872d5192902p1e833djsn347bed5ffa67",
+                        // "content-type: application/octet-stream"
                     ],
                 ]);
 
@@ -84,32 +88,34 @@ $review_open = 0;
                     // echo "<section class='section1'><p>" . $response . "</p></section>";
                     $result = json_decode($response, true);
                     // $movie_data = [];
-                    // echo "<form action='' method='post'>";
-                    foreach ($result["d"] as $key => $val) {
-                        if (array_key_exists("i", $val) and array_key_exists("id", $val) and array_key_exists("l", $val)) {
-                            // print_r($key . " :: " . $val);
-                            // if (is_array($val)) {
-                            //     foreach ($val as $k => $v)
-                            //         print_r($k . " :: " . $v . " ");
+                    // echo "<form action='' method='post'>"
+                    if (array_key_exists("d", $result)) {
+                        foreach ($result["d"] as $key => $val) {
+                            if (array_key_exists("i", $val) and array_key_exists("id", $val) and array_key_exists("l", $val)) {
+                                // print_r($key . " :: " . $val);
+                                // if (is_array($val)) {
+                                //     foreach ($val as $k => $v)
+                                //         print_r($k . " :: " . $v . " ");
 
-                            //     echo "<br>";
-                            // }
+                                //     echo "<br>";
+                                // }
 
-                            $id = $val["id"];
-                            $movie_name = $val["l"];
+                                $id = $val["id"];
+                                $movie_name = $val["l"];
 
-                            $img_url = $val["i"]["imageUrl"];
-                            $details = array($id => array("name" => $movie_name, "url" => $img_url));
-                            array_push($movie, $details);
-                            // <p>id = '$id'</p><br>
-                            // echo "<div class='api-val'>";
-                            // echo "
-                            // <image src='$img_url' alt='?' class='img-api'></image><br>
-                            // ";
-                            // echo "<input type='submit' id=$id value=$movie_name>";
-                            // echo "<button type='submit' name='mname' id = '$id' >$movie_name</button><br>";
-                            echo "<a class='searched_res' href='movie_details.php?id=$id'>$movie_name</a><br>";
-                            // echo "</div>";
+                                $img_url = $val["i"]["imageUrl"];
+                                $details = array($id => array("name" => $movie_name, "url" => $img_url));
+                                array_push($movie, $details);
+                                // <p>id = '$id'</p><br>
+                                // echo "<div class='api-val'>";
+                                // echo "
+                                // <image src='$img_url' alt='?' class='img-api'></image><br>
+                                // ";
+                                // echo "<input type='submit' id=$id value=$movie_name>";
+                                // echo "<button type='submit' name='mname' id = '$id' >$movie_name</button><br>";
+                                echo "<a class='searched_res' href='movie_details.php?id=$id'>$movie_name</a><br>";
+                                // echo "</div>";
+                            }
                         }
                     }
                     // echo "</form>";
@@ -132,7 +138,7 @@ $review_open = 0;
                 $curl = curl_init();
 
                 curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://imdb8.p.rapidapi.com/title/get-details?tconst=" . $id,
+                    CURLOPT_URL => "https://online-movie-database.p.rapidapi.com/title/get-details?tconst=" . $id,
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_ENCODING => "",
@@ -141,8 +147,9 @@ $review_open = 0;
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
-                        "X-RapidAPI-Host: imdb8.p.rapidapi.com",
-                        "X-RapidAPI-Key: 69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c"
+                        "X-RapidAPI-Host: online-movie-database.p.rapidapi.com",
+                        "X-RapidAPI-Key: " . $api_key,
+                        // "X-RapidAPI-Key: 2b4d92d6c0msh9b1c872d5192902p1e833djsn347bed5ffa67",
                     ],
                 ]);
 
@@ -181,11 +188,13 @@ $review_open = 0;
                         $movie_details["Episodes"] = $result['numberOfEpisodes'];
 
                     echo "<div class='api-val'>";
-                    if (array_key_exists('url', $result['image'])) {
-                        $img = $result['image']['url'];
-                        echo "
+                    if (array_key_exists('image', $result)) {
+                        if (array_key_exists('url', $result['image'])) {
+                            $img = $result['image']['url'];
+                            echo "
                         <image src= $img alt='?' class='img-api'></image><br>
                         ";
+                        }
                     }
                     echo "<table id = 'details'>";
                     foreach ($movie_details as $key => $val) {
@@ -239,22 +248,27 @@ $review_open = 0;
 
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (!empty($_REQUEST['user_review']) and isset($_POST['user_review']) and isset($_POST['review_submit'])) {
-                            echo "clicked!";
+                            // echo "clicked!";
                             $id = $_GET['id'];
                             $email = $_SESSION['email'];
                             $new_review = $_POST['user_review'];
                             $query = "INSERT INTO `review_db` (`id`, `email`, `review`, `timestamp`) 
                                 VALUES ('$id','$email','$new_review',CURRENT_TIMESTAMP());";
-                            mysqli_query($conn, $query);
-                            // header('location:movie_details.php?id=' . $id);
-                            // if (isset($_POST['user_review'])) {
-                            //     unset($_POST['user_review']);
-                            //     echo "unset";
-                            // }
-                            // if (isset($_POST['review_submit'])) {
-                            //     unset($_POST['review_submit']);
-                            //     echo "unset1";
-                            // }
+                            try {
+                                mysqli_query($conn, $query);
+                            } catch (Exception $e) {
+                                // echo 'Message: ' . $e->getMessage();
+                            }
+
+                            if (isset($_POST['user_review'])) {
+                                unset($_POST['user_review']);
+                                // echo "unset";
+                            }
+                            if (isset($_POST['review_submit'])) {
+                                unset($_POST['review_submit']);
+                                // echo "unset1";
+                            }
+                            // header('location:movie_details.php');
                         }
                     }
                     ?>

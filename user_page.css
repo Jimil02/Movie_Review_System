@@ -3,10 +3,51 @@
 }
 
 body {
-  background: linear-gradient(45deg, #fc466b, #3f5efb);
+  /* background: linear-gradient(45deg, #fc466b, #3f5efb);
+   */
+   background: #606c88; /* fallback for old browsers */
+   background: -webkit-linear-gradient(to right, #606c88, #3f4c6b); /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to right, #606c88, #3f4c6b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ 
   height: 100vh;
   font-family: "Montserrat", sans-serif;
   /* background-repeat: no-repeat; */
+}
+
+.similar-movie {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 2%;
+  grid-template-columns: auto auto auto auto;
+}
+.each-movie {
+  height: 100%;
+  width: 100%;
+  margin: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.img-genre {
+  height: 90%;
+  width: 90%;
+  margin: 1%;
+  border-radius: 25px;
+}
+
+.genre_res {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+}
+.genre_res:hover {
+  cursor: pointer;
+}
+.genre_res:visited {
+  color: #fff;
 }
 
 .searched_res {
@@ -14,9 +55,8 @@ body {
   font-size: 1.5rem;
   margin-left: 1.5rem;
   margin-top: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
-
 }
 
 .api-val {
@@ -24,14 +64,14 @@ body {
   justify-content: space-around;
   align-items: center;
   margin: 2vh;
-  margin-left:0;
+  margin-left: 0;
   margin-right: 0;
   flex-direction: column;
 }
 
 .img-api {
-  height : 40%;
-  width : 20%;
+  height: 40%;
+  width: 20%;
 }
 
 .side-content {
