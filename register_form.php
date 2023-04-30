@@ -51,7 +51,11 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <div class="form-container">
+<div class="navbar">
+		<a href="hello.php">Home</a>
+		<a href="#">About Us</a>
+	</div>
+    <div class="container">
         <form action="" method="post">
             <?php
             if (isset($error)) {
@@ -60,20 +64,24 @@ if (isset($_POST['submit'])) {
                 };
             };
             ?>
-            <input type="email" name="email" required placeholder="enter your email"><br>
-            <input type="text" name="fname" required placeholder="enter your first name"><br>
-            <input type="text" name="lname" required placeholder="enter your last name"><br>
-            <input type="password" name="password" required placeholder="enter your password"><br>
-            <input type="password" name="cpassword" required placeholder="confirm your password"><br>
+            <input type="email" name="email" required placeholder="Enter Email"><br>
+            <input type="text" name="fname" required placeholder="Enter First Name"><br>
+            <input type="text" name="lname" required placeholder="Enter Last Name"><br>
+            <input type="password" name="password" required placeholder="Enter Password"><br>
+            <input type="password" name="cpassword" required placeholder="Confirm Password"><br>
             <!-- <select name="user_type">
                 <option value="user">user</option>
                 <option value="admin">admin</option>
             </select> -->
-            <input type="submit" name="submit" value="register now"><br>
-            <p> Already have an account? <a href="login_form.php">Login Now</a> </p>
-
-
-
+            <input type="submit" name="submit" value="Register Now"><br>
+            <p> Already have an Account? <a href="login_form.php">Login Now</a> </p>
+            <div class="drops">
+                <div class="drop drop-1"></div>
+                <div class="drop drop-2"></div>
+                <div class="drop drop-3"></div>
+                <div class="drop drop-4"></div>
+                <!-- <div class="drop drop-5"></div> -->
+            </div>
         </form>
     </div>
 </body>

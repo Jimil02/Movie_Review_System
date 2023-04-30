@@ -18,11 +18,16 @@ $movie_details = array();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Details</title>
+    <title>PopcornProse</title>
     <link rel="stylesheet" href="user_page.css">
 </head>
 
 <body>
+<div class="navbar">
+		<a href="hello.php">Home</a>
+		<a href="#">About Us</a>
+        <button class="logout" onclick="location.href='logout.php'">Logout</button>
+	</div>
     <!-- <h1>Hello User <span><?php
                                 // echo $_SESSION['user_name']
                                 ?></span></h1>
@@ -51,7 +56,7 @@ $movie_details = array();
                 $movie_name = $_POST['search'];
 
                 curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://imdb8.p.rapidapi.com/auto-complete?q=" . $movie_name,
+                    CURLOPT_URL => "https://imdb8.p.rapidapi.com/auto-complete?q=game%20of%20thr",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_ENCODING => "",
@@ -61,7 +66,8 @@ $movie_details = array();
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
                         "X-RapidAPI-Host: imdb8.p.rapidapi.com",
-                        "X-RapidAPI-Key: 69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c"
+                        "X-RapidAPI-Key: e5879630f2msh74721ce238ad723p1222ffjsn51506bf33c79",
+                        "content-type: application/octet-stream"
                     ],
                 ]);
 
@@ -126,6 +132,7 @@ $movie_details = array();
 
                 curl_setopt_array($curl, [
                     CURLOPT_URL => "https://imdb8.p.rapidapi.com/title/get-details?tconst=" . $id,
+                    // https://imdb8.p.rapidapi.com/title/find?q=game%20of%20thr
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_ENCODING => "",
@@ -135,7 +142,7 @@ $movie_details = array();
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
                         "X-RapidAPI-Host: imdb8.p.rapidapi.com",
-                        "X-RapidAPI-Key: 69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c"
+                        "X-RapidAPI-Key: e5879630f2msh74721ce238ad723p1222ffjsn51506bf33c79"
                     ],
                 ]);
 

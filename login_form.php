@@ -30,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // print_r($rows);
     if ($rows > 0) {
         $row = mysqli_fetch_array($result);
-        $user_tyoe_query = "SELECT `user_type` FROM `customer` WHERE `email` = '$email'";
-        $user_type_result = mysqli_query($conn, $user_tyoe_query);
+        $user_type_query = "SELECT `user_type` FROM `customer` WHERE `email` = '$email'";
+        $user_type_result = mysqli_query($conn, $user_type_query);
         $user_type_array = mysqli_fetch_assoc($user_type_result);
         $user_type = $user_type_array['user_type'];
         // echo "<h1>" . $user_type . "</h1>";
@@ -66,6 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+<div class="navbar">
+		<a href="hello.php">Home</a>
+		<a href="#">About Us</a>
+	</div>
     <div class="container">
         <form action="" method="post">
             <?php
@@ -101,6 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </form>
     </div>
+    
 </body>
 
 </html>

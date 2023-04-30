@@ -34,6 +34,11 @@ $review_open = 0;
 </head>
 
 <body>
+<div class="navbar">
+		<a href="hello.php">Home</a>
+		<a href="#">About Us</a>
+        <button class="logout" onclick="location.href='logout.php'">Logout</button>
+	</div>
     <div class="wrapper">
 
         <div class="sidebar">
@@ -57,7 +62,7 @@ $review_open = 0;
                 $movie_name = $_POST['search'];
 
                 curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://imdb8.p.rapidapi.com/auto-complete?q=" . $movie_name,
+                    CURLOPT_URL => "https://imdb8.p.rapidapi.com/auto-complete?q=game%20of%20thr",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_ENCODING => "",
@@ -67,7 +72,8 @@ $review_open = 0;
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
                         "X-RapidAPI-Host: imdb8.p.rapidapi.com",
-                        "X-RapidAPI-Key: 69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c"
+                        "X-RapidAPI-Key: e5879630f2msh74721ce238ad723p1222ffjsn51506bf33c79",
+                        "content-type: application/octet-stream"
                     ],
                 ]);
 
@@ -142,7 +148,7 @@ $review_open = 0;
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => [
                         "X-RapidAPI-Host: imdb8.p.rapidapi.com",
-                        "X-RapidAPI-Key: 69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c"
+                        "X-RapidAPI-Key: e5879630f2msh74721ce238ad723p1222ffjsn51506bf33c79"
                     ],
                 ]);
 
