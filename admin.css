@@ -1,0 +1,80 @@
+* {
+  margin: 0px;
+}
+
+body {
+  /* background: linear-gradient(45deg, #fc466b, #3f5efb);
+     */
+  background: #606c88; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #606c88,
+    #3f4c6b
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #606c88,
+    #3f4c6b
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  /* background-repeat: no-repeat; */
+}
+
+.main {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  grid-gap: 5%;
+  /* align-items: center;
+  justify-content: center; */
+  margin: 5%;
+}
+
+.count_user {
+  text-align: center;
+  padding: 10%;
+  background-color: #fff;
+  color: #000;
+}
+
+.count_reviews {
+  text-align: center;
+  padding: 10%;
+  background-color: #fff;
+  color: #000;
+}
+
+.create_admin {
+    padding: 1%;
+    background-color: lightgreen;
+    font-weight: bold;
+}
+
+.create_admin:hover {
+    cursor: pointer;
+}
+
+.email_id {
+  width: 80%;
+  margin: 1%;
+  padding: 2vh;
+  border-radius: 25px;
+}
+
+.update {
+  grid-column: 1 / span 2;
+  padding: 2%;
+}
+
+.remove_user {
+  grid-column: 1 / span 2;
+  padding: 2%;
+}
+
+#heading {
+    color: #fff;
+    text-align: center;
+    margin : 2%;
+}

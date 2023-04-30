@@ -9,7 +9,7 @@ if (!$_SESSION['email'] and !isset($_SESSION['admin_name']) and !isset($_SESSION
 $movie_details = array();
 
 // global $api_key;
-$api_key = "69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c";
+$api_key = "26e38e2d66msh27d3bcdcbff0f2bp175b17jsn28039fad29f3";
 
 function get_movie_details($id)
 {
@@ -38,7 +38,8 @@ function get_movie_details($id)
     curl_close($curl);
 
     if ($err) {
-        echo "cURL Error #:" . $err;
+        // echo "cURL Error #:" . $err;
+        header('location:Error.php');
     } else {
         // echo $response;
         $res = json_decode($response, true);
@@ -76,7 +77,8 @@ function getgenre($genre)
     curl_close($curl);
 
     if ($err) {
-        echo "cURL Error #:" . $err;
+        // echo "cURL Error #:" . $err;
+        header('location:Error.php');
         return array();
     } else {
         $res = json_decode($response, true);
@@ -126,7 +128,8 @@ function getGenreFromId($id)
     curl_close($curl);
 
     if ($err) {
-        echo "cURL Error #:" . $err;
+        // echo "cURL Error #:" . $err;
+        header('location:Error.php');
     } else {
         $res = json_decode($response);
         // var_dump($res);
@@ -149,6 +152,11 @@ function getGenreFromId($id)
 </head>
 
 <body>
+    <div class="navbar">
+        <!-- <a href="hello.php">Home</a>
+        <a href="#">About Us</a> -->
+        <button class="logout" onclick="location.href='logout.php'">Logout</button>
+    </div>
     <!-- <h1>Hello User <span><?php
                                 // echo $_SESSION['user_name']
                                 ?></span></h1>
@@ -168,7 +176,7 @@ function getGenreFromId($id)
                     <button type="submit" id="search-btn" name="sbtn">
                         <image id="search-img" src="search_image.png" alt="?">
                     </button>
-                    <from>
+                </form>
             </div>
             <?php
             if (isset($_POST['sbtn']) and isset($_POST['search'])) {
@@ -291,7 +299,7 @@ function getGenreFromId($id)
                                 echo "<div class='each-movie'>";
                                 echo "<image src= $img alt='?' class='img-genre'></image>";
                                 $movie_id_for_details = $details['id'];
-                                $exp_arr = explode("/" , $movie_id_for_details);
+                                $exp_arr = explode("/", $movie_id_for_details);
                                 $movie_id_for_details = $exp_arr[2];
                                 $movie_title = $details['title'];
                                 echo "<a class='genre_res' href='movie_details.php?id=$movie_id_for_details'>$movie_title</a><br>";

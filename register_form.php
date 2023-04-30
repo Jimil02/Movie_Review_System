@@ -51,6 +51,10 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
+    <div class="navbar">
+        <a href="hello.php">Home</a>
+        <a href="#">About Us</a>
+    </div>
     <div class="form-container">
         <form action="" method="post">
             <?php

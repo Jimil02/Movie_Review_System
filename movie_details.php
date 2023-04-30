@@ -2,7 +2,7 @@
 @include 'config.php';
 session_start();
 
-$api_key = "69873a52f7msh3240d2bfcfdb944p17f775jsn01d66f73575c";
+$api_key = "26e38e2d66msh27d3bcdcbff0f2bp175b17jsn28039fad29f3";
 
 if (!isset($_SESSION['email']) or !isset($_SESSION['admin_name']) and !isset($_SESSION['user_name'])) {
     // echo "Admin name not set";
@@ -37,6 +37,11 @@ $review_open = 0;
 </head>
 
 <body>
+    <div class="navbar">
+        <!-- <a href="hello.php">Home</a>
+        <a href="#">About Us</a> -->
+        <button class="logout" onclick="location.href='logout.php'">Logout</button>
+    </div>
     <div class="wrapper">
 
         <div class="sidebar">
@@ -51,7 +56,7 @@ $review_open = 0;
                     <button type="submit" id="search-btn" name="sbtn">
                         <image id="search-img" src="search_image.png" alt="?">
                     </button>
-                    <from>
+                </form>
             </div>
             <?php
             if (isset($_POST['sbtn']) and isset($_POST['search'])) {
@@ -83,7 +88,8 @@ $review_open = 0;
                 $movie = [];
 
                 if ($err) {
-                    echo "cURL Error #:" . $err;
+                    // echo "cURL Error #:" . $err;
+                    header('location:Error.php');
                 } else {
                     // echo "<section class='section1'><p>" . $response . "</p></section>";
                     $result = json_decode($response, true);
@@ -161,7 +167,8 @@ $review_open = 0;
                 $result = json_decode($response, true);
 
                 if ($err) {
-                    echo "cURL Error #:" . $err;
+                    // echo "cURL Error #:" . $err;
+                    header('location:Error.php');
                 } else {
                     // foreach($result as $key => $val)
                     // {
